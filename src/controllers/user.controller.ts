@@ -9,7 +9,7 @@ const JWT_SECRET = process.env.JWT_SECRET as string;
 
  export const register = async  (req: Request, res: Response) => {
     try {
-    const { name, age, email, gender, password } = req.body;
+    const { name, age, email, gender, password,role } = req.body;
 
     if (!name || !email || !password)
       return res
@@ -48,13 +48,14 @@ const JWT_SECRET = process.env.JWT_SECRET as string;
       email,
       gender,
       password: hashedPassword,
+      role
     });
 
-    const token = jwt.sign(
-      { id: user._id, email: user.email },
-      JWT_SECRET,
-      { expiresIn: "7d" } 
-    );
+  const token = jwt.sign(
+  { id: user._id, email: user.email, name: user.name, role: user.role },
+  JWT_SECRET,
+  { expiresIn: "7d" }
+);
   res.cookie("token",token,{
     httpOnly:true, // بتمنع الجافا استكربت استخدمها من المتصفح نفسه
     secure:false, //علشان استخدم اللوكل هوست لو عاوز  https اخليها true
@@ -70,6 +71,7 @@ const JWT_SECRET = process.env.JWT_SECRET as string;
         email: user.email,
         gender: user.gender,
         createdAt: user.createdAt,
+        role,
         token,
       },
     });
@@ -91,11 +93,11 @@ const JWT_SECRET = process.env.JWT_SECRET as string;
     if (!isPasswordValid)
       return res.status(401).json({ message: "Invalid email or password" });
 
-    const token = jwt.sign(
-      { id: user._id, email: user.email },
-      JWT_SECRET,
-      { expiresIn: "7d" }
-    );
+  const token = jwt.sign(
+  { id: user._id, email: user.email, name: user.name, role: user.role },
+  JWT_SECRET,
+  { expiresIn: "7d" }
+);
       res.cookie("token",token,{
     httpOnly:true, // بتمنع الجافا استكربت استخدمها من المتصفح نفسه
     secure:false, //علشان استخدم اللوكل هوست لو عاوز  https اخليها true
@@ -107,11 +109,12 @@ const JWT_SECRET = process.env.JWT_SECRET as string;
       message: "Login Successful",
       token,
       user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        gender: user.gender,
-        createdAt: user.createdAt,
+     id: user._id,
+  name: user.name,
+  email: user.email,
+  gender: user.gender,
+  role: user.role,
+  createdAt: user.createdAt,
       },
     });
   } catch (error) {
