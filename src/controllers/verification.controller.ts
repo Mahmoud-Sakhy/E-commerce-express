@@ -1,7 +1,7 @@
 // controllers/verification.controller.ts
 import type { Request, Response } from "express";
 import UserModel from "../model/user.schema";
-import { sendVerificationEmail } from "../utils/emailService";
+import { sendVerificationEmail } from "../services/emailService";
 
 // دالة إنشاء كود تحقق عشوائي
 const generateVerificationCode = (): string => {

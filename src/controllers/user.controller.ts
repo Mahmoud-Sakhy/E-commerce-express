@@ -3,7 +3,7 @@ import type { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import UserModel from "../model/user.schema";
-import { sendVerificationEmail } from "../utils/emailService";
+import { sendVerificationEmail } from "../services/emailService";
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 

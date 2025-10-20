@@ -2,7 +2,7 @@
 import type { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import UserModel from "../model/user.schema";
-import { sendPasswordResetEmail } from "../utils/resetPawwordService";
+import { sendPasswordResetEmail } from "../services/resetPawwordService";
 
 // دالة إنشاء كود استعادة
 const generateResetCode = (): string => {
