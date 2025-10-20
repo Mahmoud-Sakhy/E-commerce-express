@@ -6,16 +6,9 @@ import { connectDB } from "./config/connect.db";
 import errorHandler from "./utils/statusCode";
 
 
-
 dotenv.config();
 
-
 const app = express();
-
-
-
-
-
 
 app.use(express.json());
 app.use(cookieParser());
@@ -24,7 +17,7 @@ app.use(errorHandler);
 connectDB();
 
 app.get("/", (req, res) => {
-  res.json({ message: "🚀 API working successfully!" });
+res.json({ message: "🚀 Welcome Mahmoud Sakhy! API is working successfully. 👨‍💻 Software Engineer at your service!" });
 });
 
 app.use("/auth", router);
