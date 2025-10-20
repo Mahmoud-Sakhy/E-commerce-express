@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import router from "./routes/user.routes";
 import { connectDB } from "./config/connect.db";
+import errorHandler from "./utils/statusCode";
 
 
 
@@ -16,13 +17,9 @@ const app = express();
 
 
 
-
-
-
-
-
 app.use(express.json());
 app.use(cookieParser());
+app.use(errorHandler);
 
 connectDB();
 
